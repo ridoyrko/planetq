@@ -1,0 +1,76 @@
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    networks:
+      frontend-backend: null
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db:/var/lib/postgresql/data
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    networks:
+      frontend-backend: null
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: bilal@axcert.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+  backend-node:
+    build:
+      context: ./backend
+    container_name: backend-node
+    ports:
+    - mode: ingress
+      target: 8080
+      published: "8080"
+      protocol: tcp
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      frontend-backend: null
+    volumes:
+      - ./musicdata:/musicdata:rw
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+  frontend-react:
+    build:
+      context: ./deploy
+    container_name: frontend-react
+    depends_on:
+      backend-node:
+        condition: service_started
+    networks:
+      frontend-backend: null
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+    - mode: ingress
+      target: 80
+      published: "80"
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      published: "443"
+      protocol: tcp
+    restart: always
+    volumes:
+      - ./deploy/nginx/confd:/etc/nginx/conf.d
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+networks:
+  frontend-backend: {}

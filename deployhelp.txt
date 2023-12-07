@@ -1,0 +1,102 @@
+Domain Setting:
+www.planetqproductions.com
+Forwarded to : https://planetqproductions.wixsite.com/planet-q-productions
+
+Github Link: https://github.com/Quincin2000/planetq2
+
+FTP Details :
+Protocol: SFTP
+Host: planetqproductions.com.dream.website
+Port: 22
+Username: dh_4fi92u
+Password: Bs24RwXC
+
+My WLS :
+Username: ridoyrko
+password: 2580
+
+SSH :
+Default user: ubuntu
+Ip address: 208.113.131.212
+
+sudo nano /etc/nginx/sites-available/planetqproductions.com
+
+ln -s /etc/nginx/sites-available/planetqproductions.com.conf /etc/nginx/sites-enabled/planetqproductions.com
+
+/var/www/html/planetq2/
+
+ln -s ../sites-available/planetqproductions.com.conf
+
+sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled
+
+sudo systemctl restart nginx
+
+git clone https://github.com/Quincin2000/planetq2
+
+github ridoyrko (R1d0yrk0)
+
+Password : n45gsdfM7nMJV6#
+
+planetqproductions@gmail.com
+v@6DsQ4B59sdOQh
+
+docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d planetqproductions.com
+
+sudo docker run -it --rm --name certbot \
+            -v "/home/pqp/planetq/planetq2/certbot/www/:/var/www/certbot/" \
+            -v "/home/pqp/planetq/planetq2/certbot/conf/:/etc/letsencrypt/" \
+            certbot/certbot certonly --webroot --webroot-path /var/www/certbot/ --agree-tos --renew-by-default \
+            --email planetqproducions@gmail.com  -d planetqproductions.com
+
+sudo docker run -it --rm --name certbot \
+            -v "/home/pqp/planetq/planetq2/certbot/www/:/var/www/certbot/" \
+            -v "/home/pqp/planetq/planetq2/certbot/conf/:/etc/letsencrypt/" \
+            certbot/certbot certonly --webroot --webroot-path /var/www/certbot/ --agree-tos --renew-by-default \
+            --email planetqproducions@gmail.com  -d admin.planetqproductions.com
+
+
+ssl_certificate /etc/nginx/ssl/live/admin.planetqproductions.com/fullchain.pem;
+ssl_certificate_key /etc/nginx/ssl/live/admin.planetqproductions.com/privkey.pem;
+
+/etc/nginx/ssl/live/planetqproductions.com/fullchain.pem
+/etc/nginx/ssl/live/planetqproductions.com/privkey.pem
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+
+
+ssh-keygen -t rsa -b 4096 -C "mbilaldilnawaz@gmail.com"
+
+ssh-add
+
+
+ssh -vT git@github.com
+
+/etc/ssh/ssh_config
+Host planetq
+Hostname github.com
+identityfile=/home/pqp/.ssh/id_rsa
+
+$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+$session.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
+Invoke-WebRequest -UseBasicParsing -Uri "http://localhost:8080/api/auth/sign-in" `
+-Method "POST" `
+-WebSession $session `
+-Headers @{
+"authority"="admin.planetqproductions.com"
+  "method"="POST"
+  "path"="/api/auth/sign-in"
+  "scheme"="https"
+  "accept"="application/json, text/plain, */*"
+  "accept-encoding"="gzip, deflate, br"
+  "accept-language"="en"
+  "origin"="https://admin.planetqproductions.com"
+  "referer"="https://admin.planetqproductions.com/auth/signin"
+  "sec-ch-ua"="`"Chromium`";v=`"106`", `"Google Chrome`";v=`"106`", `"Not;A=Brand`";v=`"99`""
+  "sec-ch-ua-mobile"="?0"
+  "sec-ch-ua-platform"="`"Windows`""
+  "sec-fetch-dest"="empty"
+  "sec-fetch-mode"="cors"
+  "sec-fetch-site"="same-origin"
+} `
+-ContentType "application/json;charset=UTF-8" `
+-Body "{`"email`":`"bilal@axcert.com`",`"password`":`"@ku.1234`",`"invitationToken`":null}"
